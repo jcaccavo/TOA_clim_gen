@@ -5,8 +5,8 @@
 # https://www.bioconductor.org/packages/release/bioc/html/LEA.html
 # https://bioconductor.org/packages/release/bioc/html/qvalue.html
 
-# run on server (yangtze)
-# Run in R in directory /srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/#RELEVANT RUN FOLDER
+# run on server
+# Run in R in directory
 
 # in R
 # for some reason, R package LEA not installing using usual conda method
@@ -37,25 +37,13 @@ library(qvalue)
 library(adegenet)
 library(lfmm)
 
-# currently in jc_screen_5
-
 # use snmf to inform choice of k for lfmm
 # using 20 repetitions per Varas-Myrik et al. 2022 https://doi.org/10.1016/j.foreco.2021.119856
-toa.snmf <- snmf("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/03_gen_data/5x_TOA_only_filtered_SNPs_all.ped",
+toa.snmf <- snmf(".../5x_TOA_only_filtered_SNPs_all.ped",
                  K = 1:10, 
                  entropy = TRUE, 
                  repetitions = 20,
                  project = "new")
-# run was aborted
-
-# trying again - but because the folders created in this analysis are now being used for the lfmm that is ongoing, will run this on the ped file in the plink folder
-toa.snmf <- snmf("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/21_plink/5X/5x_TOA_only_filtered_SNPs_all.ped",
-                 K = 1:10, 
-                 entropy = TRUE, 
-                 repetitions = 20,
-                 project = "new")
-# running on jc_screen_2, began 31/08 11:45
-# finished by 01/09 16:45 
 # took <30 hours
 
 # show the project
@@ -592,7 +580,7 @@ G.matrix <- G(toa.snmf, K = 4, run = 2)
 # the name of the input file with a .snmf extension ("genotypes.snmf/")
 # A unique project includes all runs for each input file.
 
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/21_plink/5X")
+setwd("...")
 
 # re-load a snmf project ####
 # An snmf project can be load in a different session.
