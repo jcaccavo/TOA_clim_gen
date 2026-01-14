@@ -45,7 +45,7 @@ Putatively-adaptive SNPs derived from LFMM based on each environmental variable,
 ## false_positives
 Scripts and input files required to run false-positive analysis
 - **generate_random_env_data.R**: R script to generate 100 sets of random variables
-- **pRDA_rand_5x_n24_1-100.R**: R script to run RDA random sets of variables
+- **pRDA_rand_5x_n24_1-100.R**: R script to run RDA on random sets of variables
 - **pRDA_rand_5x_n24_1-100.csv**: input file with random sets of environmental variables
 
 ### SNPs
