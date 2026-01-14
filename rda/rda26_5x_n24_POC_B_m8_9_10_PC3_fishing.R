@@ -2,7 +2,7 @@
 # https://github.com/Tom-Jenkins/seascape_rda_tutorial/blob/master/4.Redundancy_analysis/4.redundancy_analysis.R
 # https://www.davidzeleny.net/anadat-r/doku.php/en:forward_sel_examples
 
-setwd("/Users/JMAC/Library/CloudStorage/Dropbox/Research/ClimGenAT/GEA/rda/rda26_5x_n24_POC_B_m8_9_10_PC3_fishing")
+setwd("...")
 
 # Load packages
 library(tidyverse)
@@ -13,7 +13,7 @@ library(rlist)
 library(adegenet)
 
 # Load SNPs
-snps_unlinked_5x <-read.PLINK("/Users/JMAC/Library/CloudStorage/Dropbox/Research/ClimGenAT/GEA/genomic_data/5x_TOA_only_filtered_SNPs_all_unlinked.raw")
+snps_unlinked_5x <-read.PLINK(".../5x_TOA_only_filtered_SNPs_all_unlinked.raw")
 # Reading PLINK raw format into a genlight object... 
 # 
 # 
@@ -47,9 +47,7 @@ sum(is.na(snps_unlinked_imp_5x))
 #FORWARD SELECTION#########################################################################################################
 
 # Load predictor variables
-envs <- read.csv("/Users/JMAC/Library/CloudStorage/Dropbox/Research/ClimGenAT/GEA/rda/rda26_5x_n24_POC_B_m8_9_10_PC3_fishing/rda26_5x_n24_POC_B_m8_9_10_PC3_fishing.csv")
-# if running on server
-envs <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/rda26_5x_n24_POC_B_m8_9_10_PC3_fishing.csv")
+envs <- read.csv(".../rda26_5x_n24_POC_B_m8_9_10_PC3_fishing.csv")
 
 str(envs)
 # 'data.frame':	24 obs. of  4 variables:
@@ -225,7 +223,7 @@ dev.off()
 # https://popgen.nescent.org/2018-03-27_RDA_GEA.html#conclusions
 
 # Load predictor variables
-envs <- read.csv("/Users/JMAC/Library/CloudStorage/Dropbox/Research/ClimGenAT/GEA/rda/rda26_5x_n24_POC_B_m8_9_10_PC3_fishing/rda26_5x_n24_POC_B_m8_9_10_PC3_fishing.csv")
+envs <- read.csv(".../rda26_5x_n24_POC_B_m8_9_10_PC3_fishing.csv")
 
 str(envs)
 # 'data.frame':	24 obs. of  4 variables:
@@ -250,13 +248,13 @@ str(envs_retained)
 
 # if coming back to an old analysis in a new R workspace, you must load the RDA, as well as the SNPs, and impute them
 
-setwd("/Users/JMAC/Library/CloudStorage/Dropbox/Research/ClimGenAT/GEA/rda/rda26_5x_n24_POC_B_m8_9_10_PC3_fishing")
+setwd(".../rda26_5x_n24_POC_B_m8_9_10_PC3_fishing")
 
 # Load selected RDA
 prda_1 <- read_rds("rda26_5x_n24_POC_B_m8_9_10_PC3_fishing_prda_1.rds")
 
 # Load SNPs
-snps_unlinked_5x <-read.PLINK("/Users/JMAC/Library/CloudStorage/Dropbox/Research/ClimGenAT/GEA/genomic_data/5x_TOA_only_filtered_SNPs_all_unlinked.raw")
+snps_unlinked_5x <-read.PLINK("/.../5x_TOA_only_filtered_SNPs_all_unlinked.raw")
 # Reading PLINK raw format into a genlight object... 
 # 
 # 
@@ -516,265 +514,3 @@ table(cand$predictor)
 # this is the total candidate SNPs explained all RDA axes
 
 write.csv(cand,"rda26_5x_n24_POC_B_m8_9_10_PC3_fishing_prda_1_putative_adaptive_SNPs.csv")
-
-# ****UP TO HERE**** ####
-# on server
-# jc_screen_1
-
-# need to compare this candidate SNP list (n = 14,942 candidates) with the LFMM list for POC-B, to whittle down to the final overlapping candidate list
-# then can proceed with adptively enriched pRDA based on subset vcf using only overlapping candidates from pRDA and LFMM run on POC-B environmental data
-
-# Adaptively enriched pRDA #########################################################################################################
-
-# https://www.rdocumentation.org/packages/adegenet/versions/2.1.10/topics/extract.PLINKmap
-
-# convert vcf file to bed on server using plink - run in prompt
-# plink2 --vcf 5x_TOA_only_filtered_SNPs_unlinked_candidate_SNPs_SG_B_854.vcf --make-bed --allow-extra-chr --out 5x_TOA_only_filtered_SNPs_unlinked_candidate_SNPs_SG_B_854
-
-# convert vcf file to raw on server using plink - run in prompt
-# plink --vcf 5x_TOA_only_filtered_SNPs_unlinked_candidate_SNPs_SG_B_854.vcf --chr-set 95 --allow-extra-chr --recode A --out 5x_TOA_only_filtered_SNPs_unlinked_candidate_SNPs_SG_B_854
-
-# Run in R in directory /srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/04_rda/#RELEVANT RUN FOLDER
-
-# in R
-# Load packages
-library(tidyverse)
-library(psych)
-library(adespatial)
-library(vegan)
-library(rlist)
-library(adegenet)
-
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/04_rda/26_rda26_5x_n24_POC_B_m8_9_10_PC3_fishing")
-
-# load candidate SNPs (n = 854)
-candidate_snps_5x <-read.PLINK("5x_TOA_only_filtered_SNPs_unlinked_candidate_SNPs_SG_B_854.raw")
-# Reading PLINK raw format into a genlight object... 
-# 
-# 
-# Reading loci information... 
-# 
-# Reading and converting genotypes... 
-# .
-# Building final object... 
-# 
-# ...done.
-
-dim(candidate_snps_5x)
-# [1]  24 854
-
-sum(is.na(candidate_snps_5x))
-# [1] 0
-# Warning message:
-#   In is.na(snps_unlinked_5x) :
-#   is.na() applied to non-(list or vector) of type 'S4'
-
-# Impute missing SNPs
-candidate_snps_imp_5x <- apply(candidate_snps_5x, 2, function(x) replace(x, is.na(x), as.numeric(names(which.max(table(x))))))
-# takes <1 second
-
-dim(candidate_snps_imp_5x)
-# [1]  24 854
-
-sum(is.na(candidate_snps_imp_5x))
-# [1] 0
-
-candidate_AF <- makefreq(candidate_snps_imp_5x)
-
-# candidate FORWARD SELECTION#########################################################################################################
-
-setwd("/Users/JMAC/Library/CloudStorage/Dropbox/Research/ClimGenAT/GEA/rda/rda24_5x_n24_SG_B_m8_9_10_PC3_fishing")
-# Load predictor variables
-envs <- read.csv("rda24_5x_n24_SG_B_m8_9_10_PC3_fishing.csv")
-
-str(envs)
-# 'data.frame':   24 obs. of  4 variables:
-# $ PC1            : num  -1.32 2.44 2.26 2.26 2.26 ...
-# $ PC2            : num  -2.275 -0.739 -0.327 -0.327 -0.327 ...
-# $ PC3            : num  0.038 -0.425 -0.244 -0.244 -0.244 ...
-# $ fishing_ind_sum: int  398 0 0 0 0 0 398 398 398 356 ...
-
-#Forward selection environmental variables
-cand_sel_fs_envs <- forward.sel(Y = candidate_snps_imp_5x, X = envs)
-# Testing variable 1
-# Testing variable 2
-# Testing variable 3
-# Testing variable 4
-# Procedure stopped (alpha criteria): pvalue for variable 4 is 0.215000 (> 0.050000)
-# takes <5 seconds
-
-cand_sel_fs_envs
-#           variables order         R2     R2Cum  AdjR2Cum         F pvalue
-# 1             PC1     1 0.52165381 0.5216538 0.4999108 23.991795  0.001
-# 2             PC3     3 0.06733777 0.5889916 0.5498479  3.440545  0.001
-# 3 fishing_ind_sum     4 0.04125404 0.6302456 0.5747825  2.231429  0.008
-
-pval.adj <- p.adjust(cand_sel_fs_envs$pval, method = 'holm', n = 18)
-cand_sel_fs_envs$pval.adj <- pval.adj
-cand_sel_fs_envs
-#           variables order       R2     R2Cum  AdjR2Cum         F pvalue
-# 1             PC1     1 0.52165381 0.5216538 0.4999108 23.991795  0.001
-# 2             PC3     3 0.06733777 0.5889916 0.5498479  3.440545  0.001
-# 3 fishing_ind_sum     4 0.04125404 0.6302456 0.5747825  2.231429  0.008
-#     pval.adj
-# 1    0.018
-# 2    0.018
-# 3    0.128
-
-# candidate COLLINNEARITY#########################################################################################################
-
-# check the level of correlation between predictors (should be |r| < 0.7)
-pdf("rda24_5x_n24_SG_B_m8_9_10_PC3_fishing_candidate_pair_panel_collinearity_plot_envs.pdf")
-pairs.panels(envs, scale=T)
-dev.off()
-
-# no cross-correlation between PCs or rands whatsover
-
-# candidate CONSTRAINED RDAs#########################################################################################################
-
-#pRDA_constrained 1 all PCs (n = 3) + fishing (ind sum) as condition
-prda_can_1 <- rda(candidate_snps_imp_5x ~ PC1 + PC2 + PC3 + Condition(fishing_ind_sum) , data=envs, scale=T)
-# takes <1 second
-
-prda_can_1
-# Call: rda(formula = candidate_snps_imp_5x ~ PC1 + PC2 + PC3 +
-#             Condition(fishing_ind_sum), data = envs, scale = T)
-# 
-# -- Model Summary --
-#   
-#                   Inertia Proportion Rank
-# Total         854.00000    1.00000     
-# Conditional    32.99839    0.03864    1
-# Constrained   531.04111    0.62183    3
-# Unconstrained 289.96050    0.33953   19
-# 
-# Inertia is correlations
-# 
-# -- Eigenvalues --
-#   
-#   Eigenvalues for constrained axes:
-#   RDA1  RDA2  RDA3 
-# 490.0  25.9  15.2 
-# 
-# Eigenvalues for unconstrained axes:
-#   PC1   PC2   PC3   PC4   PC5   PC6   PC7   PC8 
-# 56.05 34.35 26.04 23.50 21.31 15.24 12.44 11.50 
-# (Showing 8 of 19 unconstrained eigenvalues)
-
-# VIF - variance inflation factor
-vif.cca(prda_can_1)
-# fishing_ind_sum     PC1             PC2             PC3 
-# 1.037914        1.016953        1.003203        1.017757 
-
-# VIF all <3! will proceed 
-
-summary(eigenvals(prda_can_1, model = "constrained"))
-# Importance of components:
-#                          RDA1     RDA2     RDA3
-# Eigenvalue            489.9963 25.86450 15.18029
-# Proportion Explained    0.9227  0.04871  0.02859
-# Cumulative Proportion   0.9227  0.97141  1.00000
-
-RsquareAdj(prda_can_1)
-# $r.squared
-# [1] 0.621828
-# 
-# $adj.r.squared
-# [1] 0.5940457
-
-list.save(prda_can_1, "rda24_5x_n24_SG_B_m8_9_10_PC3_fishing_candidate_prda_can_1.rds")
-
-anova.cca(prda_can_1, permutations = 1000, by="terms")
-# Permutation test for rda under reduced model
-# Terms added sequentially (first to last)
-# Permutation: free
-# Number of permutations: 1000
-# 
-# Model: rda(formula = candidate_snps_imp_5x ~ PC1 + PC2 + PC3 + Condition(fishing_ind_sum), data = envs, scale = T)
-#           Df Variance       F   Pr(>F)    
-# PC1       1   460.73 30.1899 0.000999 ***
-# PC2       1    15.71  1.0296 0.292707    
-# PC3       1    54.60  3.5776 0.000999 ***
-#   Residual 19   289.96                     
-# ---
-#   Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
-
-# candidate PLOT RDAs#########################################################################################################
-
-#Set colors for plotting
-# all points by CCAMLR areas 48, 58, 88
-bg_pop1_all <- c("#00441b",
-                 "#762a83",
-                 "#762a83",
-                 "#762a83",
-                 "#762a83",
-                 "#762a83",
-                 "#00441b",
-                 "#00441b",
-                 "#00441b",
-                 "#a6dba0",
-                 "#a6dba0",
-                 "#00441b",
-                 "#a6dba0",
-                 "#00441b",
-                 "#00441b",
-                 "#762a83",
-                 "#762a83",
-                 "#a6dba0",
-                 "#00441b",
-                 "#00441b",
-                 "#00441b",
-                 "#00441b",
-                 "#00441b",
-                 "#00441b") 
-# population categories for legend
-bg_pop1 <- c("#762a83","#a6dba0","#00441b")
-
-# all points by cohort categories pre- and post-2000
-bg_cohort2_all <- c("#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#980043",
-                    "#d7b5d8",
-                    "#d7b5d8",
-                    "#d7b5d8",
-                    "#d7b5d8",
-                    "#d7b5d8",
-                    "#d7b5d8",
-                    "#d7b5d8",
-                    "#d7b5d8") 
-# population categories for legend
-bg_cohort2 <- c("#d7b5d8","#980043")
-
-# plot prda_can_1 by pop1 
-pdf("rda24_5x_n24_SG_B_m8_9_10_PC3_fishing_candidate_prda_can_1_pop1.pdf")
-plot(prda_can_1, type="n", scaling=3, xlab="RDA1 92.3%", ylab="RDA2 4.9%")
-points(prda_can_1, display="sites", pch=21, cex=1, scaling=3, bg=bg_pop1_all)
-text(prda_can_1, scaling=3, display="bp", col="#0868ac", cex=1)
-legend("topright", legend=c("48","58","88"), bty="o", col="gray32", pch=21, cex=1, pt.bg=bg_pop1)
-dev.off()
-
-# plot prda_can_1 by cohort2 
-pdf("rda24_5x_n24_SG_B_m8_9_10_PC3_fishing_candidate_prda_can_1_cohort2.pdf")
-plot(prda_can_1, type="n", scaling=3, xlab="RDA1 92.3%", ylab="RDA2 4.9%")
-points(prda_can_1, display="sites", pch=21, cex=1, scaling=3, bg=bg_cohort2_all)
-text(prda_can_1, scaling=3, display="bp", col="#0868ac", cex=1)
-legend("topright", legend=c("pre2000","post2000"), bty="o", col="gray32", pch=21, cex=1, pt.bg=bg_cohort2)
-dev.off()
-
-# screeplot of prda_can_1
-pdf("rda24_5x_n24_SG_B_m8_9_10_PC3_fishing_candidate_prda_can_1_screeplot.pdf")
-screeplot(prda_can_1)
-dev.off()
