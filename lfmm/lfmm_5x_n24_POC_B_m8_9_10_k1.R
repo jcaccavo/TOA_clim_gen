@@ -5,8 +5,8 @@
 # helpful links
 # https://rdrr.io/cran/lfmm/man/lfmm_ridge.html
 
-# run on server (yangtze)
-# Run in R in directory /srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/#RELEVANT RUN FOLDER
+# run on server
+# Run in R in directory
 
 # in R
 # install packages (if needed)
@@ -20,16 +20,16 @@ library(adegenet)
 library(lfmm)
 
 # load SNPs ####
-snps_unlinked_5x <-read.PLINK("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/03_gen_data/5x_TOA_only_filtered_SNPs_all_unlinked.raw")
+snps_unlinked_5x <-read.PLINK(".../5x_TOA_only_filtered_SNPs_all_unlinked.raw")
 
 # impute missing SNPs
 snps_unlinked_imp_5x <- apply(snps_unlinked_5x, 2, function(x) replace(x, is.na(x), as.numeric(names(which.max(table(x))))))
 
 # current_m #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/09_lfmm1_5x_n24_POC_B_m8_9_10_k1_cm")
+setwd(".../09_lfmm1_5x_n24_POC_B_m8_9_10_k1_cm")
 
 # import environmental data
-cm <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_current_m.csv", header=FALSE)
+cm <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_current_m.csv", header=FALSE)
 
 str(cm)
 # 'data.frame':   24 obs. of  1 variable:
@@ -67,10 +67,10 @@ toa.FDR.cm.k1 <- colnames(snps_unlinked_imp_5x)[which(toa.qv.cm.k1 < 0.1)]
 write.csv(toa.FDR.cm.k1,"lfmm1_5x_n24_POC_B_m8_9_10_cm_k1_putative_adaptive_SNPs_0.1.csv")
 
 # current_z #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/10_lfmm1_5x_n24_POC_B_m8_9_10_k1_cz")
+setwd(".../10_lfmm1_5x_n24_POC_B_m8_9_10_k1_cz")
 
 # import environmental data
-cz <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_current_z.csv", header=FALSE)
+cz <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_current_z.csv", header=FALSE)
 
 str(cz)
 # 'data.frame':   24 obs. of  1 variable:
@@ -108,10 +108,10 @@ toa.FDR.cz.k1 <- colnames(snps_unlinked_imp_5x)[which(toa.qv.cz.k1 < 0.1)]
 write.csv(toa.FDR.cz.k1,"lfmm1_5x_n24_POC_B_m8_9_10_cz_k1_putative_adaptive_SNPs_0.1.csv")
 
 # mxl_0.01 #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/11_lfmm1_5x_n24_POC_B_m8_9_10_k1_mxl1")
+setwd(".../11_lfmm1_5x_n24_POC_B_m8_9_10_k1_mxl1")
 
 # import environmental data
-mxl1 <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_mxl0.01.csv", header=FALSE)
+mxl1 <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_mxl0.01.csv", header=FALSE)
 
 str(mxl1)
 # 'data.frame':   24 obs. of  1 variable:
@@ -149,10 +149,10 @@ toa.FDR.mxl1.k1 <- colnames(snps_unlinked_imp_5x)[which(toa.qv.mxl1.k1 < 0.1)]
 write.csv(toa.FDR.mxl1.k1,"lfmm1_5x_n24_POC_B_m8_9_10_mxl1_k1_putative_adaptive_SNPs_0.1.csv")
 
 # mxl_0.03 #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/12_lfmm1_5x_n24_POC_B_m8_9_10_k1_mxl3")
+setwd(".../12_lfmm1_5x_n24_POC_B_m8_9_10_k1_mxl3")
 
 # import environmental data
-mxl3 <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_mxl0.03.csv", header=FALSE)
+mxl3 <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_mxl0.03.csv", header=FALSE)
 
 str(mxl3)
 # 'data.frame':   24 obs. of  1 variable:
@@ -190,10 +190,10 @@ toa.FDR.mxl3.k1 <- colnames(snps_unlinked_imp_5x)[which(toa.qv.mxl3.k1 < 0.1)]
 write.csv(toa.FDR.mxl3.k1,"lfmm1_5x_n24_POC_B_m8_9_10_mxl3_k1_putative_adaptive_SNPs_0.1.csv")
 
 # salinity #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/13_lfmm1_5x_n24_POC_B_m8_9_10_k1_sal")
+setwd(".../13_lfmm1_5x_n24_POC_B_m8_9_10_k1_sal")
 
 # import environmental data
-sal <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_sal.csv", header=FALSE)
+sal <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_sal.csv", header=FALSE)
 
 str(sal)
 # 'data.frame':   24 obs. of  1 variable:
@@ -231,10 +231,10 @@ toa.FDR.sal.k1 <- colnames(snps_unlinked_imp_5x)[which(toa.qv.sal.k1 < 0.1)]
 write.csv(toa.FDR.sal.k1,"lfmm1_5x_n24_POC_B_m8_9_10_sal_k1_putative_adaptive_SNPs_0.1.csv")
 
 # sea_ice_concentration #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/14_lfmm1_5x_n24_POC_B_m8_9_10_k1_sic")
+setwd(".../14_lfmm1_5x_n24_POC_B_m8_9_10_k1_sic")
 
 # import environmental data
-sic <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_sea_ice_conc.csv", header=FALSE)
+sic <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_sea_ice_conc.csv", header=FALSE)
 
 str(sic)
 # 'data.frame':   24 obs. of  1 variable:
@@ -272,10 +272,10 @@ toa.FDR.sic.k1 <- colnames(snps_unlinked_imp_5x)[which(toa.qv.sic.k1 < 0.1)]
 write.csv(toa.FDR.sic.k1,"lfmm1_5x_n24_POC_B_m8_9_10_sic_k1_putative_adaptive_SNPs_0.1.csv")
 
 # sea_ice_thickness #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/15_lfmm1_5x_n24_POC_B_m8_9_10_k1_sit")
+setwd(".../15_lfmm1_5x_n24_POC_B_m8_9_10_k1_sit")
 
 # import environmental data
-sit <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_sea_ice_thick.csv", header=FALSE)
+sit <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_sea_ice_thick.csv", header=FALSE)
 
 str(sit)
 # 'data.frame':   24 obs. of  1 variable:
@@ -313,10 +313,10 @@ toa.FDR.sit.k1 <- colnames(snps_unlinked_imp_5x)[which(toa.qv.sit.k1 < 0.1)]
 write.csv(toa.FDR.sit.k1,"lfmm1_5x_n24_POC_B_m8_9_10_sit_k1_putative_adaptive_SNPs_0.1.csv")
 
 # sea_surface_temperature #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/16_lfmm1_5x_n24_POC_B_m8_9_10_k1_sst")
+setwd(".../16_lfmm1_5x_n24_POC_B_m8_9_10_k1_sst")
 
 # import environmental data
-sst <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_sst.csv", header=FALSE)
+sst <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_sst.csv", header=FALSE)
 
 str(sst)
 # 'data.frame':   24 obs. of  1 variable:
@@ -354,10 +354,10 @@ toa.FDR.sst.k1 <- colnames(snps_unlinked_imp_5x)[which(toa.qv.sst.k1 < 0.1)]
 write.csv(toa.FDR.sst.k1,"lfmm1_5x_n24_POC_B_m8_9_10_sst_k1_putative_adaptive_SNPs_0.1.csv")
 
 # PC1 #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/29_lfmm1_5x_n24_POC_B_m8_9_10_k1_PC1")
+setwd(".../29_lfmm1_5x_n24_POC_B_m8_9_10_k1_PC1")
 
 # import environmental data
-PC1 <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_PC1.csv", header=FALSE)
+PC1 <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_PC1.csv", header=FALSE)
 
 str(PC1)
 # 'data.frame':   24 obs. of  1 variable:
@@ -395,10 +395,10 @@ toa.FDR.PC1.k1 <- colnames(snps_unlinked_imp_5x)[which(toa.qv.PC1.k1 < 0.1)]
 write.csv(toa.FDR.PC1.k1,"lfmm_5x_n24_POC_B_m8_9_10_PC1_k1_putative_adaptive_SNPs_0.1.csv")
 
 # PC2 #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/30_lfmm1_5x_n24_POC_B_m8_9_10_k1_PC2")
+setwd(".../30_lfmm1_5x_n24_POC_B_m8_9_10_k1_PC2")
 
 # import environmental data
-PC2 <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_PC2.csv", header=FALSE)
+PC2 <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_PC2.csv", header=FALSE)
 
 str(PC2)
 # 'data.frame':   24 obs. of  1 variable:
@@ -436,10 +436,10 @@ toa.FDR.PC2.k1 <- colnames(snps_unlinked_imp_5x)[which(toa.qv.PC2.k1 < 0.1)]
 write.csv(toa.FDR.PC2.k1,"lfmm_5x_n24_POC_B_m8_9_10_PC2_k1_putative_adaptive_SNPs_0.1.csv")
 
 # PC3 #############################################################################################################################
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/05_lfmm/31_lfmm1_5x_n24_POC_B_m8_9_10_k1_PC3")
+setwd(".../31_lfmm1_5x_n24_POC_B_m8_9_10_k1_PC3")
 
 # import environmental data
-PC3 <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/lfmm_5x_n24_POC_B_m8_9_10_PC3.csv", header=FALSE)
+PC3 <- read.csv(".../lfmm_5x_n24_POC_B_m8_9_10_PC3.csv", header=FALSE)
 
 str(PC3)
 # 'data.frame':   24 obs. of  1 variable:
