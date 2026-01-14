@@ -1,7 +1,7 @@
 # run pRDA on random variables 3 at a time 30x to achieve 100 lists of random candidate SNPs
 
 # Run in R in directory /srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/04_rda/26_pRDA_rand_5x_n24_1-100
-setwd("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/04_rda/26_pRDA_rand_5x_n24_1-100")
+setwd("...")
 
 # in R
 # Load packages
@@ -15,14 +15,14 @@ library(Hmisc)
 library(tidyr)
 
 # Load SNPs
-snps_unlinked_5x <-read.PLINK("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/03_gen_data/5x_TOA_only_filtered_SNPs_all_unlinked.raw")
+snps_unlinked_5x <-read.PLINK(".../5x_TOA_only_filtered_SNPs_all_unlinked.raw")
 
 # Impute missing SNPs
 snps_unlinked_imp_5x <- apply(snps_unlinked_5x, 2, function(x) replace(x, is.na(x), as.numeric(names(which.max(table(x))))))
 # may take a few minutes
 
 # Load environmental variables
-envs <- read.csv("/srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/02_env_data/pRDA_rand_5x_n24_1-100.csv")
+envs <- read.csv(".../pRDA_rand_5x_n24_1-100.csv")
 
 # RANDOM VARIABLES 1 - 3 ###################################################################################################################################################################################################################################
 
