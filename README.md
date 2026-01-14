@@ -43,3 +43,10 @@ Scripts and input files required for the latent-factor mixed modelling (LFMM) an
 Putatively-adaptive SNPs derived from LFMM based on each environmental variable, set of PC scores, and random variable
 
 ## false_positives
+Scripts and input files required to run false-positive analysis
+- **generate_random_env_data.R**: R script to generate 100 sets of random variables
+- **pRDA_rand_5x_n24_1-100.R**: R script to run RDA random sets of variables
+- **pRDA_rand_5x_n24_1-100.csv**: input file with random sets of environmental variables
+
+### SNPs
+Putatively-adaptive SNPs derived from RDA based on random sets of variables
