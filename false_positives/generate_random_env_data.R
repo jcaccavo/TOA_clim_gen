@@ -1,40 +1,14 @@
-# generate random environmental data
-# pull n values for each random environmental variable from a standard normal distribution
+# generate random data
+# pull n values for each random variable from a standard normal distribution
 # rnorm (n, mean = x, sd = y)
 # n – number of observations we want rnorm to return
 # mean – mean value of the normal distribution we are using
 # sd – standard deviation of the normal distribution we are using
 # for a standard normal distribution, mean = 0 and sd = 1
-# do this 8 times for each environmental variable
-
-current_m <- rnorm(24, 0, 1)
-current_z <- rnorm(24, 0, 1)
-sst <- rnorm(24, 0, 1)
-sal <- rnorm(24, 0, 1)
-sea_ice_thick <- rnorm(24, 0, 1)
-sea_ice_conc <- rnorm(24, 0, 1)
-mxl0.01 <- rnorm(24, 0, 1)
-mxl0.03 <- rnorm(24, 0, 1)
-
-rand_envs <- cbind(current_m, current_z, sst, sal, sea_ice_thick, sea_ice_conc, mxl0.01, mxl0.03)
-
-setwd("/Users/JMAC/Library/CloudStorage/Dropbox/Research/ClimGenAT/GEA/rda/rda23_5x_n24_rand")
-
-write.csv(rand_envs,"rda23_5x_n24_rand_envs.csv")
-
-# repeat process now 3 times for each PC
 
 rand1 <- rnorm(24, 0, 1)
 rand2 <- rnorm(24, 0, 1)
 rand3 <- rnorm(24, 0, 1)
-
-rand_envs <- cbind(rand1, rand2, rand3)
-
-setwd("/Users/JMAC/Library/CloudStorage/Dropbox/Research/ClimGenAT/GEA/rda/rda26_5x_n24_rand3")
-
-write.csv(rand_envs,"rda26_5x_n24_rand3_PCs.csv")
-
-# repeat process not 97 times for each PC
 rand4 <- rnorm(24, 0, 1)
 rand5 <- rnorm(24, 0, 1)
 rand6 <- rnorm(24, 0, 1)
@@ -133,7 +107,10 @@ rand98 <- rnorm(24, 0, 1)
 rand99 <- rnorm(24, 0, 1)
 rand100 <- rnorm(24, 0, 1)
 
-rand_envs <- cbind(rand4,
+rand_envs <- cbind(rand1,
+                   rand2,
+                   rand3,
+                   rand4,
                    rand5,
                    rand6,
                    rand7,
@@ -231,6 +208,6 @@ rand_envs <- cbind(rand4,
                    rand99,
                    rand100)
 
-setwd("/Users/JMAC/Library/CloudStorage/Dropbox/Research/ClimGenAT/GEA/rda/pRDA_rand_5x_n24_4-100")
+setwd("...")
 
-write.csv(rand_envs,"pRDA_rand_5x_n24_4-100.csv")
+write.csv(rand_envs,"pRDA_rand_5x_n24_1-100.csv")
