@@ -57,6 +57,7 @@ Putatively-adaptive SNPs derived from RDA based on random sets of variables
 1. Install [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) using [conda](https://anaconda.org/bioconda/bedtools)
 `conda install bioconda::bedtools`
 `bedtools v2.31.1`
+2.	Create coordinates file using Excel to add and subtract 300 from the SNP locations
 
 ### STEP 2 – Blast candidate sequences against the same well-annotated
 ### STEP 3 – Filter coords.bed output file from blast
