@@ -2,7 +2,7 @@
 # https://github.com/Tom-Jenkins/seascape_rda_tutorial/blob/master/4.Redundancy_analysis/4.redundancy_analysis.R
 # https://www.davidzeleny.net/anadat-r/doku.php/en:forward_sel_examples
 
-# run on server (yangtze)
+# run on server
 # install necessary packages using conda
 # conda install -c conda-forge r-tidyverse
 # conda install -c conda-forge r-psych
