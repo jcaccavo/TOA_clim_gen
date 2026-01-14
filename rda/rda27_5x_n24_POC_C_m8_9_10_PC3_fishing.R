@@ -11,7 +11,7 @@
 # conda install -c conda-forge r-rlist
 # conda install -c conda-forge r-adegenet
 
-# Run in R in directory /srv/public/users/jcaccavo/11_CCGA_full_seq/02_NovaSeq/02_WG/24_gea/04_rda/#RELEVANT RUN FOLDER
+# Run in R in directory .../#RELEVANT RUN FOLDER
 
 # in R
 # Load packages
