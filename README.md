@@ -67,9 +67,8 @@ bedtools getfasta -fi .../D.mawsoni.genome.fasta -bed .../toa_toa_SG_B_854_putat
 
 ### STEP 2 – Blast candidate sequences against the same well-annotated
 4. Download reference genome for Patagonian toothfish _Dissostichus mawsoni_ (TOP) [reference genome](https://www.ncbi.nlm.nih.gov/datasets/taxonomy/100907/) published in 2023; instructions for genome download are the same regardless of species
-   
-6. 
-
+![download1](figures/Picture1.png)
+![download2](figures/Picture2.png)
 ### STEP 3 – Filter coords.bed output file from blast
 ### STEP 4 – Find genes within a X kb distance of candidate SNPs
 
