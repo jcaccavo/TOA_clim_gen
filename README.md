@@ -93,5 +93,27 @@ NOTE that if you have a VPN, it should be turned off for the download, otherwise
     - Upload magma executable to server
 
 10. Download [genome annotation of TOP](https://www.ncbi.nlm.nih.gov/datasets/gene/GCA_031216635.1/)
+![download3](images/Picture3.png)
+![download4](images/Picture4.png)
+    - Open downloaded .tsv in Excel `deleginoides_annotation.tsv`; convert to .xlsx and modify `deleginoides_gene_loc_file_prep.xlsx` – first column should be the gene name (all unique values), the second column should be the chromosome name (chromosome number, starting with 1), and the third and fourth columns should be the start and end position of the gene (Begin and End)
+    - For the TOP genome, there are 1819/32,225 genes that have no chromosome number; these were removed from the gene loc file, which in the end has 30,406 genes
+    - Export these 4 columns of data as a .txt file (no headers)
+
+11. Use magma to find genes within X kb of putative adaptive SNPs
+    - window=20,20 refers to the distance from the SNP over which to search for genes, in this case 20 kb
+    - Start with 20 kb – but can also try 10 kb, 5 kb, 1 kb, and 0.5 kb if a large number of associated genes comes out (i.e. >500, >1000)
+    - IMPORTANT – chromosome labels must be numeric, starting with 1. Extract numeric identifying information from chromosome labels, determine the minimum numeric value, and subtract that value-1 from all chromosome numeric values, so that the lowest number chromosome is 1
+    - IMPORTANT – gene IDs must all be unique; no repeats. Depending on the annotation of the genome, the ‘Symbol’ or ‘Gene ID’ column may not consist of all unique IDs. In many cases where there are repeats, the ‘Symbol’ and ‘Gene ID’ values will both be repeats; it is only the ‘Gene Type’ value that will be different between any 2 repeat ‘Gene ID’s.
+    - For TOP, use the ‘protein ID’ identifier; there are unique values for all genes, and then this becomes a useful simple identifier for the fasta sequences to extract official gene symbols in a later step from [KOBAS](http://bioinfo.org/kobas/)
+    - Run in prompt – finishes in <1 second
+`.../magma --annotate nonhuman window=20,20 --snp-loc .../toa_top_SG_B_854_putative_adaptive_SNPs_1_scans_coords.txt --gene-loc .../top_genes_protein_id.txt --out .../toa_top_candidate_genes_20kb_scans_protein_id`
+
+### STEP 5 – Perform gene ontology (GO) analysis with DAVID
+12. Download the .annot output, which contains 3 columns: gene name, position, SNP associated with the gene
+•	Convert to .txt to open in Excel, and then save as .xlsx to manipulate
+•	Extract Gene ID numbers to submit to DAVID (or go back to the genome annotation and find the gene Symbols; which may be better input for DAVID)
+
+   
+
 
 
