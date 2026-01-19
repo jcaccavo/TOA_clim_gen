@@ -55,11 +55,21 @@ Putatively-adaptive SNPs derived from RDA based on random sets of variables
 
 ### STEP 1 – Map candidate regions to TOA genome
 1. Install [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) using [conda](https://anaconda.org/bioconda/bedtools)
-`conda install bioconda::bedtools`
-`bedtools v2.31.1`
-2.	Create coordinates file using Excel to add and subtract 300 from the SNP locations
+```bash
+conda install bioconda::bedtools`
+bedtools v2.31.1`
+```
+2.	Create coordinates file using Excel to add and subtract 300 from the SNP locations `toa_top_SG_B_854_putative_adaptive_SNPs_1_scans_coords.xlsx`
+3.	Obtain 600bp sequence with outlier SNP (300bp flanking region) using TOA genome; run in prompt – finishes in <1 second
+```bash
+bedtools getfasta -fi .../D.mawsoni.genome.fasta -bed .../toa_toa_SG_B_854_putative_adaptive_SNPs_1_scans_coords.txt -fo .../toa_toa_SG_B_854_putative_adaptive_SNPs_1_scans.fasta
+```
 
 ### STEP 2 – Blast candidate sequences against the same well-annotated
+4. Download reference genome for Patagonian toothfish _Dissostichus mawsoni_ (TOP) [reference genome](https://www.ncbi.nlm.nih.gov/datasets/taxonomy/100907/) published in 2023; instructions for genome download are the same regardless of species
+   
+6. 
+
 ### STEP 3 – Filter coords.bed output file from blast
 ### STEP 4 – Find genes within a X kb distance of candidate SNPs
 
