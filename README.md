@@ -110,8 +110,22 @@ NOTE that if you have a VPN, it should be turned off for the download, otherwise
 
 ### STEP 5 – Perform gene ontology (GO) analysis with DAVID
 12. Download the .annot output, which contains 3 columns: gene name, position, SNP associated with the gene
-•	Convert to .txt to open in Excel, and then save as .xlsx to manipulate
-•	Extract Gene ID numbers to submit to DAVID (or go back to the genome annotation and find the gene Symbols; which may be better input for DAVID)
+    - Convert to .txt to open in Excel, and then save as .xlsx to manipulate
+    - Extract Gene ID numbers to submit to [DAVID](https://davidbioinformatics.nih.gov/tools.jsp) (or go back to the genome annotation and find the gene Symbols; which may be better input for [DAVID](https://davidbioinformatics.nih.gov/tools.jsp))
+   
+13.	May need to use [KOBAS](http://bioinfo.org/kobas/) to derive Symbols from Fasta sequences (e.g. for TOP)
+    - In the event that Fasta sequences are needed for [KOBAS](http://bioinfo.org/kobas/), use Protein IDs to provide partial header ID information to a [bespoke python script](https://www.dropbox.com/scl/fi/ozg8siq8f5jay3nsnxx1k/subset_fasta_copied_chatgpt_output.docx?rlkey=fwhycioukydu87xs84spy97p4&dl=0) to subset genome Fasta
+    - Then simplify the Fasta sequence headers using the same list of Protein IDs using a [second bespoke python script](https://www.dropbox.com/scl/fi/vdno5owpz0mcb07ngbdo4/change_fasta_headers.py?rlkey=seh63l0456mdxgjgc9ijvjazf&dl=0), so that KOBAS can recognize the sequences and output official gene symbols that are compatible with [DAVID](https://davidbioinformatics.nih.gov/tools.jsp)
+    - In [KOBAS](http://bioinfo.org/kobas/) select species “Danio rerio” (zebrafish)
+![download1](images/Picture5.png)
+    - For Input type, select Fasta Nucleotide Sequence
+![download1](images/Picture6.png)
+    - Upload fasta file, and click run
+![download1](images/Picture7.png)
+    - The run will take ~5 – 30 minutes, depending on the number of sequences you’re inputting (it was 5 – 30 minutes for me for 400 – 1500 sequences)
+![download1](images/Picture8.png)
+    - Click “Download total terms” to download .txt file of the full list of the [KOBAS](http://bioinfo.org/kobas/) output
+![download1](images/Picture9.png)
 
    
 
