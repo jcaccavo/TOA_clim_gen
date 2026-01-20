@@ -52,6 +52,7 @@ Scripts and input files required to run false-positive analysis
 Putatively-adaptive SNPs derived from RDA based on random sets of variables
 
 ## gene_ontology
+NOTE – make sure to convert all .txt files created with Excel to unix format with dos2unix
 
 ### STEP 1 – Map candidate regions to TOA genome
 1. Install [bedtools](https://bedtools.readthedocs.io/en/latest/index.html) using [conda](https://anaconda.org/bioconda/bedtools)
@@ -109,14 +110,14 @@ NOTE that if you have a VPN, it should be turned off for the download, otherwise
 `.../magma --annotate nonhuman window=20,20 --snp-loc .../toa_top_SG_B_854_putative_adaptive_SNPs_1_scans_coords.txt --gene-loc .../top_genes_protein_id.txt --out .../toa_top_candidate_genes_20kb_scans_protein_id`
 
 ### STEP 5 – Perform gene ontology (GO) analysis with DAVID
-12. Download the .annot output, which contains 3 columns: gene name, position, SNP associated with the gene
-    - Convert to .txt to open in Excel, and then save as .xlsx to manipulate
-    - Extract Gene ID numbers to submit to [DAVID](https://davidbioinformatics.nih.gov/tools.jsp) (or go back to the genome annotation and find the gene Symbols; which may be better input for [DAVID](https://davidbioinformatics.nih.gov/tools.jsp))
+12. Download the .annot output `toa_top_candidate_genes_20kb_scans_protein_id.annot`, which contains 3 columns: gene name, position, SNP associated with the gene
+    - Convert to .txt to open in Excel, and then save as .xlsx `toa_top_candidate_genes_20kb_scans_protein_id.xlsx` to manipulate
+    - Extract Gene ID numbers to submit to [DAVID](https://davidbioinformatics.nih.gov/tools.jsp) `toa_top_candidate_genes_20kb_scans_protein_id.txt` (or go back to the genome annotation and find the gene Symbols; which may be better input for [DAVID](https://davidbioinformatics.nih.gov/tools.jsp))
    
 13.	May need to use [KOBAS](http://bioinfo.org/kobas/) to derive Symbols from Fasta sequences (e.g. for TOP)
     - In the event that Fasta sequences are needed for [KOBAS](http://bioinfo.org/kobas/), use Protein IDs to provide partial header ID information to a [bespoke python script](https://www.dropbox.com/scl/fi/ozg8siq8f5jay3nsnxx1k/subset_fasta_copied_chatgpt_output.docx?rlkey=fwhycioukydu87xs84spy97p4&dl=0) to subset genome Fasta
     - Then simplify the Fasta sequence headers using the same list of Protein IDs using a [second bespoke python script](https://www.dropbox.com/scl/fi/vdno5owpz0mcb07ngbdo4/change_fasta_headers.py?rlkey=seh63l0456mdxgjgc9ijvjazf&dl=0), so that KOBAS can recognize the sequences and output official gene symbols that are compatible with [DAVID](https://davidbioinformatics.nih.gov/tools.jsp)
-    - In [KOBAS](http://bioinfo.org/kobas/) select species “Danio rerio” (zebrafish)
+    - In [KOBAS](http://bioinfo.org/kobas/) select species “_Danio rerio_” (zebrafish)
 ![download1](images/Picture5.png)
     - For Input type, select Fasta Nucleotide Sequence
 ![download1](images/Picture6.png)
@@ -124,10 +125,31 @@ NOTE that if you have a VPN, it should be turned off for the download, otherwise
 ![download1](images/Picture7.png)
     - The run will take ~5 – 30 minutes, depending on the number of sequences you’re inputting (it was 5 – 30 minutes for me for 400 – 1500 sequences)
 ![download1](images/Picture8.png)
-    - Click “Download total terms” to download .txt file of the full list of the [KOBAS](http://bioinfo.org/kobas/) output
+    - Click “Download total terms” to download .txt file of the full list of the [KOBAS](http://bioinfo.org/kobas/) output `toa_top_candidate_genes_20kb_sequences_proteinID_headers_KOBAS_output.xlsx`
 ![download1](images/Picture9.png)
 
-   
-
-
-
+14.	Prepare [DAVID](https://davidbioinformatics.nih.gov/tools.jsp) data entry
+    - IMPORTANT – there should be no ‘LOC123456789’ gene labels in your Symbol list; these labels refer to unknown genes, and will create errors if loaded into [DAVID](https://davidbioinformatics.nih.gov/tools.jsp)
+    - Step 1: Paste gene list in A
+![download1](images/Picture10.png)
+    - Step 2: Select Identifier OFFICIAL_GENE_SYMBOL
+![download1](images/Picture11.png)
+![download1](images/Picture12.png)
+    - Step 2a: Select species _Danio rerio_ (zebrafish)
+![download1](images/Picture13.png)
+    - Step 3: Select List Type (Gene List)
+![download1](images/Picture14.png)
+    - Submit list – the output should then look as follows; select Functional Annotation Tool
+![download1](images/Picture15.png)
+    - Expand Gene Ontology
+![download1](images/Picture16.png)
+    - You will use the GOTERMs indicated in red – open the Chart of one
+![download1](images/Picture17.png)
+    - Expand Options
+![download1](images/Picture18.png)
+    - Check Fold Enrichment, FDR; uncheck Benjamini
+![download1](images/Picture19.png)
+    - Final chart
+![download1](images/Picture20.png)
+    - Select Download File to output an html page with the GO analysis output text
+    - Copy the text into Excel (the text format should automatically divide the results into appropriate columns); identify how many GO terms are significant (_p_ < 0.05 or _p_ < 0.01) `DAVID_output_TOP.xlsx`
