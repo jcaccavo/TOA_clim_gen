@@ -60,8 +60,8 @@ NOTE – make sure to convert all .txt files created with Excel to unix format w
 conda install bioconda::bedtools`
 bedtools v2.31.1`
 ```
-2.	Create coordinates file using Excel to add and subtract 300 from the SNP locations
-3.	Obtain 600bp sequence with outlier SNP (300bp flanking region) using TOA genome; run in prompt – finishes in <1 second
+2.	Create coordinates file using Excel to add and subtract 300 from the SNP locations `toa_toa_SG_B_854_putative_adaptive_SNPs_1_scans_coords.txt`
+3.	Obtain 600bp sequence with outlier SNP (300bp flanking region) using TOA genome `toa_toa_SG_B_854_putative_adaptive_SNPs_1_scans.fasta`; run in prompt – finishes in <1 second
 ```bash
 bedtools getfasta -fi .../D.mawsoni.genome.fasta -bed .../toa_toa_SG_B_854_putative_adaptive_SNPs_1_scans_coords.txt -fo .../toa_toa_SG_B_854_putative_adaptive_SNPs_1_scans.fasta
 ```
@@ -81,7 +81,7 @@ NOTE that if you have a VPN, it should be turned off for the download, otherwise
 `blastn -query .../toa_toa_SG_B_854_putative_adaptive_SNPs_1_scans.fasta -db .../00b_deleginoides_genome/deleginoides_refseq.db -out .../toa_top_SG_B_854_putative_adaptive_SNPs_1_scans_coords.bed -outfmt 6`
 
 ### STEP 3 – Filter coords.bed output file from blast
-8. Download the output .bed file to local computer and analyze scope of e-values, (change extension to .txt to open in Excel) `toa_top_SG_B_854_putative_adaptive_SNPs_1_scans_coords.xlsx`
+8. Download the output .bed file to local computer and analyze scope of e-values, (change extension to .txt to open in Excel)
     - Column headers can be found by searching for [blast bed output format](https://www.metagenomics.wiki/tools/blast/blastn-output-format-6)
     - Filter sequences where e >1.00E-50 (evalue), or outside of the 550 – 650 bp size range (length)
     - For the TOP genome, there were 27 genes with the JASDAP* Accession code, and thus lacking a chromosome number; as with the gene loc file preparation, these were removed from the SNP loc file
@@ -98,7 +98,7 @@ NOTE that if you have a VPN, it should be turned off for the download, otherwise
 ![download4](images/Picture4.png)
     - Open downloaded .tsv in Excel `deleginoides_annotation.tsv`; convert to .xlsx and modify `deleginoides_gene_loc_file_prep.xlsx` – first column should be the gene name (all unique values), the second column should be the chromosome name (chromosome number, starting with 1), and the third and fourth columns should be the start and end position of the gene (Begin and End)
     - For the TOP genome, there are 1819/32,225 genes that have no chromosome number; these were removed from the gene loc file, which in the end has 30,406 genes
-    - Export these 4 columns of data as a .txt file (no headers)
+    - Export these 4 columns of data as a .txt file (no headers) `top_genes_protein_id.txt`
 
 11. Use magma to find genes within X kb of putative adaptive SNPs
     - window=20,20 refers to the distance from the SNP over which to search for genes, in this case 20 kb
