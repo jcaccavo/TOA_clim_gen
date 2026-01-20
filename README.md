@@ -1,5 +1,5 @@
 # TOA_clim_gen
-This repository contains data files and scripts used for the genotype-environment association (GEA) and gene ontology (GO) analyses from the paper Caccavo et al. 2026b "Salinity exposure in early-life drives genomic adaptation to climate change in Antarctic toothfish (Dissostichus mawsoni)".
+This repository contains data files and scripts used for the genotype-environment association (GEA) and gene ontology (GO) analyses from the paper Caccavo et al. 2026 "Salinity exposure in early-life drives genomic adaptation to climate change in Antarctic toothfish (Dissostichus mawsoni)".
 
 ## pca
 Scripts and input files required for the principal component analysis (PCA) of all eight environmental variables
